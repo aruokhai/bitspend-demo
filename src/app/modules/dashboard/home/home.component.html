@@ -1,0 +1,47 @@
+<!-- Fix  -->
+<div *ngIf=" (user$ | async) !== null" class="relative flex">
+    <app-sidebar [sideNavIsToggled]="sideNavStatus" (sideNavToggled)="sideNavStatus = $event" ></app-sidebar>
+    <div [ngClass]="{'sidebar-close': sideNavStatus}" class="main">
+        <app-navbar (sideNavToggled)="sideNavStatus = $event" ></app-navbar>
+        <div class="main-content">
+            <div class="w-full flex flex-col justify-between">
+                <app-dynamic-title></app-dynamic-title>
+                <div class="abl-main mt-[24px] flex flex-col">
+                    <div class="quick-actions w-full flex md:flex-row sm:flex-col md:justify-between sm:justify-center">
+                        <app-card-balance></app-card-balance>
+                        <div class="kyc-container">
+                            <div class="md:w-[70%] sm:w-[80%]">
+                                <h4 class="text-grey-900 sm:text-[14px] md:text-[16px] font-bold">Update your KYC Information</h4>
+                                <p class="text-grey-600 sm:text-[12px] md:text-[14px] sm:leading-[17px] md:leading-[20.3px]">Please update/verify your information before 13th July 2023 to unlock level benefits</p>
+                                <span class="text-red-primary font-semibold cursor-pointer mt-[20px] text-[14px] flex items-center">
+                                    <p>Complete Verification</p> 
+                                    <i class='bx bx-chevron-right' ></i>
+                                </span>
+                            </div>
+                            <div class="sm:h-[80px] sm:w-[80px] md:h-[140px] md:w-[140px] shield">
+                                <img src="../../../../assets/icons/shield-tick.svg" class="object-cover h-full w-full" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <app-quick-action></app-quick-action>
+                    </div>
+                </div>
+
+            </div>
+            <div class="flex justify-between items-center mt-[24px] mb-[30px] w-full">
+                <h1 class="font-semibold text-[18px] text-grey-900">Recent Transactions</h1>
+                <span routerLink="/dashboard/transaction-history" class="text-[14px] flex items-center font-semibold cursor-pointer text-red-primary ease-in-out"><p>See All</p> <i class='bx bx-chevron-right' ></i></span>
+            </div>
+            <div class="mt-6 bg-[white] rounded-[7px] overflow-hidden">
+                <app-transaction-table [transactionsHistory]="(transactions$ | async) ?? []"></app-transaction-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="(isLoading$ | async)?.loading" class="flex justify-center items-center w-screen h-screen z-[90000] " >
+    <app-loading-screen></app-loading-screen>
+</div>
+
+

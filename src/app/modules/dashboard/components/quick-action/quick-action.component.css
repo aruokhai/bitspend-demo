@@ -1,0 +1,67 @@
+.card{
+    width: 240px;
+    max-width: 250px;
+    height: 110px;
+    flex-shrink: 0;
+    border-radius: 10px;
+}
+.deposit{
+    border: 1px solid #E5DED1;
+    background: var(--warning-50, #FEF6E7);
+}
+.withdraw{
+    border: 1px solid #E5D4CE;
+    background: #FFECE5;
+}
+.pay{
+    border: 1px solid #CEDBD2;
+    background: #E7F6EC;
+}
+.create{
+    border: 1px solid #CCD7E3;
+    background: #E3EFFC;
+}
+
+/* .card-container{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));;
+    column-gap: 10px;
+    align-self: stretch;
+    gap: 16px;
+} */
+
+.card-container{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    align-self: stretch;
+}
+.card-text{
+    font-size: 16px;
+    color: #1D2739;
+}
+
+.icons{
+    width: 32px;
+    height: 32px;
+}
+
+
+@media screen and (min-width: 297px ) and (max-width: 790px){
+    .card-container{
+        gap: 16px;
+    }
+    .card{
+        width: 70px;
+        height: 84px;
+    }
+    .card-text{
+        font-size: 10px;
+        line-height: 13px;
+    }
+    .icons{
+        width: 14px;
+        height: 14px;
+    }
+    
+}

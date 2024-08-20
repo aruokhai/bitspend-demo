@@ -1,0 +1,83 @@
+<div class=" backdrop-brightness-50 flex justify-center items-center fixed top-0 left-0 w-screen h-screen z-[100000]">
+    <div class="contain flex flex-col justify-center items-center bg-[#F9FAFB] text-grey-900 sm:w-[90vw] sm:h-auto  md:w-[580px] md:h-[600px] rounded-[30px] z-[10000] overflow-hidden">
+        <div *ngIf="step === 1" class="w-full flex justify-center items-center ">
+            <img (click)="onCancelButtonClicked()" src="../../../../assets/icons/close.svg" class="w-[24px] h-[24px] absolute top-8 right-6 cursor-pointer ">
+            <div class="flex flex-col justify-center items-center px-4 py-7 h-full sm:w-[95%] md:w-[70%] ">
+                 <div class="flex items-center justify-center mt-[24px] mb-[24px] bg-[#FAF2F3] stroke-[#F4C0DB] rounded-[50%] h-[80px] w-[80px] ">
+                    <img src="../../../../assets/icons/make_payment.svg" class="w-[33px] h-[24px] ">
+                </div>
+                <div class="mb-[24px] flex flex-col justify-center items-center ">
+                    <h3 class="font-semibold sm:text-[18px] md:text-[28px] text-center ">Make a payment</h3>
+                    <p class="sm:text-[12px] md:text-[14px] text-[#475367] text-center sm:w-[85%] md:w-full">Pay for items using the bitcoin lightning method by copying and pasting the invoice here.</p>
+                </div>
+                <form class="w-full flex flex-col justify-center items-center " [formGroup]= "paymentForm" (ngSubmit)="getPaymentDetails()">
+                    <div class="relative form-div flex flex-col">
+                        <label>Invoice</label>
+                        <input formControlName="invoice" name="invoice"  type="text" placeholder="Paste invoice here" />
+                    </div>             
+                    <button class="block w-[100px] text-[14px] mt-[24px] py-3 font-medium bg-red-error rounded-[7px] text-[white] cursor-pointer " type="submit">Proceed</button>
+                </form>
+            </div>
+    </div>
+    
+    <!-- confirmation page -->
+    <div *ngIf="step === 2" class="w-full flex justify-center items-center ">
+            <div class="flex flex-col justify-center items-center px-4 py-7 h-full sm:w-[95%] md:w-[70%] ">
+                <div class="mb-[24px] flex flex-col justify-center items-center ">
+                    <h3 class="font-semibold text-[28px] text-center ">Confirm transaction</h3>
+                    <p class=" text-[14px] text-[#475367] text-center">Please confirm the details of your transaction</p>
+                </div>
+                <div class="w-full flex flex-col justify-center items-center ">
+                    <div class="relative form-div flex flex-col">
+                         <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] text-[14px]">Price Rate</span>
+                            <span class="text-[#101928] text-[14px] font-medium">{{currencyPriceRate | roundAmount}}</span>
+                        </div>
+                        <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] text-[14px]">Bitcoin Amount</span>
+                            <span class="text-[#101928] text-[14px] font-medium">{{btcAmount}}</span>
+                        </div>
+                        <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] text-[14px]">Fiat Amount</span>
+                            <span class="text-[#101928] text-[14px] font-medium">₦{{fiatAmount | roundAmount}}</span>
+                        </div>
+                        <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] text-[14px]">Fiat Fee</span>
+                            <span class="text-[#101928] text-[14px] font-medium">₦{{ fiatFees | roundAmount}}</span>
+                        </div>
+                    </div>             
+                    <button (click)="sendPayment()" class="block w-[190px] text-[14px] mt-[24px] py-[16px] px-[24px] font-medium bg-red-error rounded-[7px] text-[white] cursor-pointer " type="submit">Make Payment</button>
+                    <p (click)="back()" class=" text-red-error cursor-pointer text-[14px] mt-[18px] font-semibold">Back</p>
+                </div>
+            </div>
+    </div>
+
+    <!-- Loading spinner -->
+    <div *ngIf="isLoading">
+        <app-loader></app-loader>
+    </div>
+
+     <div *ngIf="isFailed">
+        <div class="w-full flex justify-center items-center flex-col px-4 md:py-0 sm:py-[24px] ">
+            <img (click)="onCancelButtonClicked()" src="../../../../assets/icons/close.svg" class="w-[24px] h-[24px] absolute top-8 right-6 cursor-pointer ">
+            <img  src="../../../../assets/icons/worried-face.svg" class="w-[150px] h-[150px]">
+            <h2 class="text-[28px] italic font-semibold mt-[12px] text-red-error text-center">Oh snap!</h2>
+            <p class="text-[#475367] text-[14px] w-[75%] text-center ">We were unable to process your transaction at this time. Please try again!</p>
+            <button (click)="sendPayment()" class="block w-[190px] text-[14px] mt-[24px] py-[16px] px-[24px] font-medium bg-red-error rounded-[7px] text-[white] cursor-pointer " type="submit">Try again</button>
+            <p (click)="reloadPage()" class=" text-red-error cursor-pointer text-[14px] mt-[18px] font-semibold">Back</p>
+        </div>
+    </div>
+
+    <!-- Success Page -->
+    <div *ngIf="step === 3">
+        <div class="w-full flex justify-center items-center flex-col px-4 md:py-0 sm:py-[24px] ">
+            <img (click)="onCancelButtonClicked()" src="../../../../assets/icons/close.svg" class="w-[24px] h-[24px] absolute top-8 right-6 cursor-pointer ">
+            <img  src="../../../../assets/icons/success.svg" class="w-[150px] h-[150px]">
+            <h2 class="text-[28px] italic font-semibold mt-[12px] text-[#099137] text-center">Success!</h2>
+            <p class="text-[#475367] text-[14px] text-center ">Your transaction was successful</p>
+            <button (click)="reloadPage()" class="block w-[190px] text-[14px] mt-[24px] py-[16px] px-[24px] font-medium bg-red-error rounded-[7px] text-[white] cursor-pointer " type="submit">Close</button>
+            <p (click)="back()" class=" text-red-error cursor-pointer text-[14px] mt-[18px] font-semibold">Make another payment</p>
+        </div>
+    </div>
+</div>
+</div>

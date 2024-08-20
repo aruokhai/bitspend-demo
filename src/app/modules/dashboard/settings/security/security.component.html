@@ -1,0 +1,40 @@
+<div class="flex">
+    <app-sidebar [sideNavIsToggled]="sideNavStatus" (sideNavToggled)="sideNavStatus = $event" ></app-sidebar>
+    <div class="main bg-grey-light">
+        <app-navbar (sideNavToggled)="sideNavStatus = $event" ></app-navbar>
+        <div class="main-content">
+            <app-dynamic-title></app-dynamic-title>
+            <div class="mt-[24px] w-auto mb-[24px]">
+                <ul class="tab-ul">
+                    <li routerLink="/dashboard/settings/profile" routerLinkActive="active">Profile</li>
+                    <li routerLink="/dashboard/settings/security" routerLinkActive="active">Account security</li>
+                </ul>
+            </div>
+            <form class="bg-[white] p-6 flex md:flex-row sm:flex-col justify-between items-start sm:px-3 sm:py-6 md:p-6">
+                <div class="sm:mr-0 sm:mb-[24px] md:mr-[40px]">
+                    <h1 class="font-semibold text-[16px] text-grey-900 mb-1">Update your password</h1>
+                    <p class="text-[14px] leading-tight text-grey-500">It has to be up to 8 characters.</p>
+                </div>
+                <div class="md:w-[400px] sm:w-full">
+                            <div class="form-div flex mb-4  flex-col">
+                                <label>New Password</label>
+                                <input type="password"  />
+                            </div>
+                            <div class="form-div flex mb-4  flex-col">
+                                <label>Confirm New Password</label>
+                                <input type="password"  />
+                            </div>
+                </div>
+                <button value="submit" class=" cursor-pointer sm:hidden md:flex save-btn pl-[12px] pr-[18px] py-[12px] flex items-center justify-center rounded-[8px] ">
+                    <img src="../../../../assets/icons/save-changes.svg" class=" h-[20px] w-[20px] mr-[8px]" />
+                    <p class="text-[14px] font-semibold text-[white]">Save changes</p>
+                </button>
+                <button value="submit" class=" cursor-pointer sm:flex md:hidden save-btn w-full mt-[24px] p-[16px] flex items-center justify-center rounded-[8px] ">
+                    <img src="../../../../assets/icons/save-changes.svg" class=" h-[20px] w-[20px] mr-[8px]" />
+                    <p class="text-[14px] font-semibold text-[white]">Save changes</p>
+                </button>
+            </form>
+            
+        </div>
+    </div>
+</div>

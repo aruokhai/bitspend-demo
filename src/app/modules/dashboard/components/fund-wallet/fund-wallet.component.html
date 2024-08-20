@@ -1,0 +1,46 @@
+<div class=" backdrop-brightness-50 flex justify-center items-center fixed top-0 left-0 w-screen h-screen z-[100000]">
+<div class= "contain flex flex-col justify-center items-center bg-[#F9FAFB] text-grey-900 sm:w-[90vw] sm:h-auto  md:w-[580px] md:h-[600px] rounded-[30px] z-[10000] overflow-hidden">
+    <img (click)="onCancelButtonClicked()" src="../../../../assets/icons/close.svg" class="w-[24px] h-[24px] absolute top-8 right-6 cursor-pointer sm:hidden md:flex ">
+    <div class=" flex flex-col justify-center items-center px-4 py-7 h-full sm:w-[95%] md:w-[70%]">
+        <div class="mb-[24px] flex flex-col justify-center items-center ">
+            <h3 class="font-semibold sm:text-[18px] md:text-[28px] text-center ">Fund your bitspend wallet!</h3>
+            <p class="sm:text-[12px] md:text-[14px] text-[#475367] text-center sm:w-[85%] md:w-full">Your Bitspend Wallet will automatically receive a top-up from any money transfers made to this bank account.</p>
+        </div>
+        <div class="flex items-center justify-center bg-[#FAF2F3] stroke-[#F4C0DB] rounded-[50%] h-[72px] w-[72px] ">
+            <img src="../../../../assets/icons/bank.svg" class="w-[30px] h-[30px] ">
+        </div>
+        <div class="w-full mt-[24px] flex flex-col justify-center items-center ">
+            <div class="w-full">
+                <div class="flex justify-between">
+                    <p class="text-[#475367] sm:text-[12px] md:text-[14px] ">Bank name</p>
+                    <img src="../../../../assets/icons/kuda.png" class="w-[60px] h-[14px] ">
+                </div>
+                <hr />
+                <div class="flex justify-between items-start">
+                    <h5 class="text-[#475367] sm:text-[12px] md:text-[14px]">Account Name</h5>
+                    <p class="text-[14px] text-grey-900 w-[50%] text-right">(Bitspend)-{{accountName}}</p>
+                </div>
+                <hr />
+                <div class="flex  justify-between items-center">
+                    <div class="flex flex-col">
+                        <h5 class="text-[#475367] sm:text-[12px] md:text-[14px]">Account Number</h5>
+                        <p class="sm:text-[12px] md:text-[14px] text-grey-900">{{accountNumber}}</p>
+                    </div>
+                    <div (click)="copyAccountNumber()" class="py-[8px] px-[12px] flex justify-center items-center border border-[#F4C0DB] rounded-[8px] cursor-pointer">
+                        <img src="../../../../assets/icons/copy.svg" class="w-[20px] h-[20px] mr-[8px]">
+                        <p>Copy</p>
+                    </div>
+                </div>
+            </div>
+            <div (click)="onCancelButtonClicked()" class=" flex justify-center items-center w-[190px] mt-[30px] px-[16px] py-[8px] text-[white] bg-red-error rounded-[8px] cursor-pointer">
+                <p>Close</p>
+            </div>
+        </div>
+
+
+        <div *ngIf="isCopied" class="copyMsg absolute top-5 w-full flex justify-center">
+            <span class="text-sm text-[white] bg-red-error px-4 py-3 rounded-[6px]">{{this.copiedMessage}}</span>
+        </div>
+    </div>
+</div>
+</div>

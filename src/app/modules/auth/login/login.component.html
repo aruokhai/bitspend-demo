@@ -1,0 +1,79 @@
+<div class="md:bg-[white] sm:bg-grey-100 text-dark-primary relative flex items-center lg:justify-end w-full h-screen sm:justify-center ">
+    <div class="right-banner relative w-[40%] h-full sm:invisible lg:visible">
+        <div class="absolute top-0 left-0 w-full h-full">
+            <img src="../../../../assets/imgs/rb.webp" class="object-cover h-full w-full">
+        </div>
+        <div class="slide-in absolute bg-[#3E3838] w-[80%] p-[24px] rounded-[20px] bottom-10">
+            <div>
+                <p class="text-[#F0E6E6] text-[14px]">
+                    Shopping just got easier!
+                </p>
+                <p class="text-[#F0E6E6] text-[14px]">
+                    My country restricts dollar cards, so making online payment is hard. 
+                    With Bitspend, i can make payment anywhere in the world by pasting my invoice straight into the platform. 
+                    It’s even better that i can make foreign payments with my local currency. 
+                    This is a huge relief!
+                </p>
+            </div>
+            <div class="flex justify-between items-center w-[183px] mt-6">
+                <div class="h-[40px] w-[40px] bg-[white] rounded-[50%]"></div>
+                <div class="flex flex-col">
+                    <h3 class="font-semibold text-[14px] text-[white]">Ariana Grande</h3>
+                    <p class="text-[#A29999] text-[12px]">Web Designer, Google</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="login-main lg:w-[55vw] sm:w-full flex justify-center  items-center">
+        <div class="login-container flex flex-col lg:w-[50%] sm:w-[90%]">
+            <span class="p-4 mb-3 rounded-[6px] bg-red-primary text-[white]" *ngIf="(auth$ | async)?.error; let error">{{error}}</span>
+            <div *ngIf="error" class="bg-red-light p-4 text-red-primary rounded-[7px] flex items-center justify-start">
+                <i class='bx bxs-x-circle text-red-primary mr-2 text-[18px]'></i>
+                <span>{{error}}</span>
+            </div>
+            <div class="mb-6 flex flex-col justify-start">
+                <h1 class="lg:text-[38px] sm:text-[1.8rem] font-semibold">Welcome back!</h1>
+                <p class="sm:hidden md:inline text-[14px] text-[#645D5D]">Don't have an account? <a routerLink="/auth/signup" class="text-red-primary font-semibold" href="">Sign Up</a></p>
+                <p class="sm:inline md:hidden text-[14px] text-[#645D5D]">Input the details associated with your bitspend account to continue making payments</p>
+            </div>
+            <form class="form-group flex flex-col w-full" 
+                [formGroup]= "loginForm"
+                (ngSubmit)="login()"
+            >
+                <div class="">
+                    <label for="email" class="text-grey-900 font-medium text-[14px]">Email address</label>
+                    <input class="form-control" formControlName="email" name="email" type="email" placeholder="you@example.com" required/>
+                </div>
+                <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+                    <div class="error" *ngIf="loginForm.get('email')?.hasError('required')">Email is required</div>
+                    <div class="error" *ngIf="loginForm.controls['email']?.hasError('pattern')">Invalid email format</div>
+                </div>
+                <div class="flex flex-col mt-4 relative">
+                    <label for="password" class="text-grey-900 font-medium text-[14px]">Password</label>
+                    <img *ngIf="togglePassword === false" (click)="onTogglePassword()"  src='../../../../assets/icons/eye-slash.png' class="absolute top-[37px] right-4 text-[#5F5F5F] cursor-pointer" />
+                    <fa-icon *ngIf="togglePassword === true" (click)="onTogglePassword()" [icon]="faEye" class="absolute top-[37px] right-4 text-[#5F5F5F] cursor-pointer"></fa-icon>
+                    <input type="{{ togglePassword ? 'text' : 'password' }}" formControlName="password" name="password"  placeholder="At least 8 characters" />
+                </div>
+                <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+                    <div class="error" *ngIf="loginForm.get('password')?.hasError('required')">Password is required</div>
+                    <div class="error" *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 8 characters</div>
+                </div>
+                <div class="mt-8 relative">
+                    <button *ngIf="(auth$ | async)?.authState !== 'pending'" class="btn bg-red-primary cursor-pointer">Sign in</button>
+                    <button *ngIf="(auth$ | async)?.authState === 'pending'" class="btn bg-red-primary relative cursor-not-allowed"><span class="flex items-center justify-center"><app-loading-spinner></app-loading-spinner></span></button>
+                </div>
+            </form>
+            <a class="text-center text-[14px] text-[#645D5D] font-medium mt-8">Forgot Password? <span routerLink="/forgot-password" class="text-red-primary font-semibold cursor-pointer">Recover</span></a>
+        <div class="mt-6 flex items-center justify-center">
+            <hr class="w-[48%] mr-2 border-[#F0F2F5] " /> <span class="text-sm text-[14px] text-[#667185] ">Or</span> <hr class="w-[48%] ml-2  border-[#F0F2F5]"/>
+        </div>
+        <div class="mt-8">
+            <app-google-signin-btn></app-google-signin-btn>
+        </div>
+        <p class="sm:inline md:hidden text-[14px] text-[#645D5D] text-center mt-[24px]">Don't have an account? <a routerLink="/auth/signup" class="text-red-primary font-semibold" href="">Sign Up</a></p>
+
+</div>
+    </div>
+
+</div>

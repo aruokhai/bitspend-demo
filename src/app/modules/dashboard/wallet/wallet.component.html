@@ -1,0 +1,14 @@
+<div class="flex">
+    <app-sidebar [sideNavIsToggled]="sideNavStatus" (sideNavToggled)="sideNavStatus = $event" ></app-sidebar>
+    <div class="main bg-grey-light">
+        <app-navbar (sideNavToggled)="sideNavStatus = $event" ></app-navbar>
+        <div class="main-content">
+            <app-dynamic-title></app-dynamic-title>
+            <div class="quick-actions mt-[24px] w-full flex md:flex-row sm:flex-col md:justify-between sm:justify-center">
+                <app-card-balance></app-card-balance>
+            </div>
+        </div>
+    </div>
+</div>
+
+

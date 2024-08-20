@@ -1,0 +1,120 @@
+<div class="md:bg-[white] sm:bg-grey-100 relative text-dark-primary flex items-center lg:justify-end w-full lg:h-auto sm:justify-center lg:p-0 sm:py-8">
+        <div class="right-banner relative w-[40%] h-full sm:invisible lg:visible">
+        <div class="absolute top-0 left-0 w-full h-full">
+            <img src="../../../../assets/imgs/rb.webp" class="object-cover h-full w-full">
+        </div>
+        <div class="slide-in absolute bg-[#3E3838] w-[80%] p-[24px] rounded-[20px] bottom-10">
+            <div>
+                <p class="text-[#F0E6E6] text-[14px]">
+                    Shopping just got easier!
+                </p>
+                <p class="text-[#F0E6E6] text-[14px]">
+                    My country restricts dollar cards, so making online payment is hard. 
+                    With Bitspend, i can make payment anywhere in the world by pasting my invoice straight into the platform. 
+                    It’s even better that i can make foreign payments with my local currency. 
+                    This is a huge relief!
+                </p>
+            </div>
+            <div class="flex justify-between items-center w-[183px] mt-6">
+                <div class="h-[40px] w-[40px] bg-[white] rounded-[50%]"></div>
+                <div class="flex flex-col">
+                    <h3 class="font-semibold text-[14px] text-[white]">Ariana Grande</h3>
+                    <p class="text-[#A29999] text-[12px]">Web Designer, Google</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="signup-main lg:h-auto sm:h-auto lg:mt-[9rem] lg:pb-[4rem] lg:w-[55vw] sm:w-full flex justify-center items-center">
+    <div class="signup-container flex flex-col lg:w-[60%] sm:w-[90%]">
+        <span class="p-4 mb-3 rounded-[6px] bg-red-primary text-[white]" *ngIf="(auth$ | async)?.error; let error">{{error}}</span>
+        <div *ngIf="error" class="bg-red-light p-4 text-red-primary rounded-[7px] flex items-center justify-start">
+                <i class='bx bxs-x-circle text-red-primary mr-2 text-[18px]'></i>
+                <span>{{error}}</span>
+            </div>
+    <div class="mb-6 flex flex-col justify-start">
+            <h1 class="sm:hidden md:inline lg:text-[36px] sm:text-[1.8rem] font-semibold">New Joiner? Welcome!</h1>
+            <h1 class="sm:inline md:hidden lg:text-[36px] sm:text-[1.8rem] font-semibold">Let's get started</h1>
+            <p class="sm:inline md:hidden text-[14px] text-[#645D5D]">Please write your first and last name as they appear on your government issued ID</p>
+            <p class="sm:hidden md:inline text-[14px] text-[#645D5D]">Already have an account? <a routerLink="/auth/login" class="text-red-primary font-semibold" href="">Sign in</a></p>
+    </div>
+    <form class="form-group flex flex-col w-full" 
+        [formGroup] = "signupForm"
+        (ngSubmit)="signup()"
+    >
+        <div class="flex flex-row">
+            <div class="basis-1/2 mr-2">
+                <div class="">
+                    <label for="firstname"  class="text-grey-900 font-medium text-[14px]">First name</label>
+                    <input class="form-control" formControlName="firstname"  name="firstname" type="text" placeholder="Firstname" />
+                </div>
+                <div *ngIf="signupForm.get('firstname')?.invalid && (signupForm.get('firstname')?.dirty || signupForm.get('firstname')?.touched)">
+                    <div class="error" *ngIf="signupForm.get('firstname')?.hasError('required')">Firstname is required</div>
+                </div>
+            </div>
+            <div class="basis-1/2">
+                <div class="">
+                <label for="lastname"  class="text-grey-900 font-medium text-[14px]">Last name</label>
+                <input class="form-control" formControlName="lastname"  name="lastname" type="text" placeholder="Lastname" />
+            </div>
+            <div *ngIf="signupForm.get('lastname')?.invalid && (signupForm.get('lastname')?.dirty || signupForm.get('lastname')?.touched)">
+                <div class="error" *ngIf="signupForm.get('lastname')?.hasError('required')">Lastname is required</div>
+            </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label for="email"  class="text-grey-900 font-medium text-[14px]">Email</label>
+            <input class="form-control" formControlName="email"  name="email" type="email" placeholder="you@example.com" />
+        </div>
+        <div *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
+            <div class="error" *ngIf="signupForm.get('email')?.hasError('required')">Email is required</div>
+            <div class="error" *ngIf="signupForm.get('email')?.hasError('pattern')">Invalid email format</div>
+        </div>
+        <div class="mt-2 relative">
+            <label for="country"  class="text-grey-900 font-medium text-[14px]">Country</label>
+            <i class="bx bxs-down-arrow absolute text-[#5F5F5F] top-[58px] right-5 text-[0.6rem]"></i>
+            <select name="country" formControlName="country" class="mt-2 w-full p-[16px] rounded-[6px]">
+                <option value="" selected>Choose a country</option>
+                <option value="Nigeria">
+                    Nigeria
+                </option>
+            </select>
+        </div>
+        <div *ngIf="signupForm.get('country')?.invalid && (signupForm.get('country')?.dirty || signupForm.get('country')?.touched)">
+            <div class="error" *ngIf="signupForm.get('country')?.hasError('required')">Please select a country</div>
+        </div>
+        <div class="mt-4">
+            <label for="phoneNumber"  class="text-grey-900 font-medium text-[14px]">Phone number</label>
+            <input type="text" formControlName="phoneNumber" name="phoneNumber"  placeholder="Enter phone number..." />
+        </div>
+        <div *ngIf="signupForm.get('phoneNumber')?.invalid && (signupForm.get('phoneNumber')?.dirty || signupForm.get('phoneNumber')?.touched)">
+            <div class="error" *ngIf="signupForm.get('phoneNumber')?.hasError('required')">Phone number is required</div>
+            <div class="error" *ngIf="signupForm.get('phoneNumber')?.hasError('pattern')">Invalid phone number</div>
+        </div>
+        <div class="flex flex-col mt-4 relative">
+            <label for="password" class="text-grey-900 font-medium text-[14px]">Password</label>
+                <img *ngIf="togglePassword === false" (click)="onTogglePassword()"  src='../../../../assets/icons/eye-slash.png' class="absolute top-[37px] right-4 text-[#5F5F5F] cursor-pointer" />
+                <fa-icon *ngIf="togglePassword === true" (click)="onTogglePassword()" [icon]="faEye" class="absolute top-[37px] right-4 text-[#5F5F5F] cursor-pointer"></fa-icon>
+            <input type="{{ togglePassword ? 'text' : 'password' }}" formControlName="password" name="password"  placeholder="At least 8 characters" />
+        </div>
+        <div *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)">
+            <div class="error" *ngIf="signupForm.get('password')?.hasError('required')">Password is required</div>
+            <div class="error" *ngIf="signupForm.get('password')?.hasError('pattern')">Should contain at least one number and special character</div>
+            <div class="error" *ngIf="signupForm.get('password')?.hasError('minlength')">Password must be at least 8 characters</div>
+        </div>
+        <div class="mt-4">
+            <button *ngIf="(auth$ | async)?.authState !== 'pending'" class="btn bg-red-primary">Signup</button>
+            <button *ngIf="(auth$ | async)?.authState === 'pending'" class="btn bg-red-primary relative h-[50px] cursor-not-allowed"><span class="flex items-center justify-center"><app-loading-spinner></app-loading-spinner></span></button>
+        </div>
+    </form>
+        <div class="mt-8 flex items-center justify-center">
+            <hr class="w-[48%] mr-2 border-[#F0F2F5] " /> <span class="text-sm text-[14px] text-[#667185] ">Or</span> <hr class="w-[48%] ml-2  border-[#F0F2F5]"/>
+        </div>
+        <div class="mt-8">
+            <app-google-signin-btn></app-google-signin-btn>
+        </div>
+        <p class="sm:inline md:hidden text-center mt-[24px] text-[14px] text-[#645D5D]">Already have an account? <a routerLink="/auth/login" class="text-red-primary font-semibold" href="">Sign in</a></p>
+</div>
+
+    </div>
+</div>

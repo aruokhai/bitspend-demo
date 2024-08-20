@@ -1,0 +1,25 @@
+.select_wrap{
+    background-color: #f8f8f8;
+    padding: 11px 10px;
+    display: block;
+    height: 43px;
+    width: 100%;
+    font-size: .9rem;
+    border-radius: 7px;
+}
+
+.select_ul{
+    background-color: white;
+    filter: drop-shadow(-2px 13px 13px rgba(14, 14, 14, 0.15));
+    border-radius: 8px;
+}
+
+.select_ul li{
+    padding: 0.7rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.select_ul li:hover{
+     background-color: #f8f8f8;
+}

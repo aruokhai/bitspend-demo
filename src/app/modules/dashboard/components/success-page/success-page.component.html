@@ -1,0 +1,16 @@
+<div class="w-full h-screen flex justify-center items-center flex-col px-4 bg-[white]">
+        <div class="bg-red-light rounded-[50%] w-[180px] h-[180px] flex justify-center items-center">
+            <i class='bx bx-check text-red-primary text-[100px]'></i>
+        </div>
+        <span class="text-red-primary text-[28px] font-semibold mt-3">
+            <p class="text-center">Withdrawn</p>
+            <p class="text-center mt-[-5px]">Successfully</p>
+        </span>
+        <div class="mt-3">
+            <p class="text-dark-primary text-lg text-center leading-tight">You have successfully withdrawn <span class="font-bold">₦{{amount}}.00</span> from your wallet.</p>
+        </div>
+        <button (click)="reloadPage()" class="bg-red-primary flex justify-center items-center text-[white] px-4 py-2 font-medium rounded-[6px] mt-5">
+            <span>Back to Dashboard</span> 
+            <i class='bx bx-chevron-right text-[16px]'></i>
+        </button>
+</div>

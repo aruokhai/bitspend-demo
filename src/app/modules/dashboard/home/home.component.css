@@ -1,0 +1,70 @@
+.kyc-container{
+	width: 500px;
+	height: 152px;
+	flex-shrink: 0;
+	border-radius: 10px;
+	padding: 24px;
+	border: 1px solid var(--error-75, #F2BCBA);
+	background: var(--error-50, #FBEAE9);
+	overflow: hidden;
+	position: relative;
+}
+
+.shield{
+	position: absolute;
+	top: 10px;
+	right: 0;
+}
+
+/* .sidebar.hide ~ #content {
+	width: calc(100% - 60px);
+	left: 60px;
+	
+} */
+
+.abl-main{
+	width: 100%;
+}
+
+.rlh-card{
+	width: 25%;
+}
+
+@media screen and (min-width: 279px) and (max-width: 760px) {
+	.rlh-card{
+		visibility: hidden;
+		width: 0%;
+	}
+	.kyc-container{
+		width: 100%;
+		padding: 24px 8px;
+		margin-top: 18px;
+	}
+	.shield{
+		top: 80px;
+		right: -20px;
+	}
+}
+
+@media screen and (min-width: 700px) and (max-width: 930px) {
+	.abl-main{
+		width: 100%;
+	}
+
+	.rlh-card{
+		width: 30%;
+	}
+}
+
+@media screen and (min-width: 279px) and (max-width: 760px) {
+	.abl-main{
+		width: 100%;
+	}
+
+	.rlh-card{
+		width: 0%;
+	}
+	.act-card{
+		width: 100%;
+	}
+}

@@ -1,0 +1,50 @@
+<div class=" backdrop-brightness-50 flex justify-center items-center fixed top-0 left-0 w-screen h-screen z-[100000]">
+    <div class="contain flex flex-col justify-center items-center bg-[#F9FAFB] text-grey-900 sm:w-[90vw] sm:h-auto  md:w-[500px] md:h-auto py-[24px] rounded-[30px] z-[10000] overflow-hidden">
+       <div class="w-full flex justify-center items-center relative">
+            <img (click)="cancel()" src="../../../../assets/icons/close.svg" class="w-[24px] h-[24px] absolute top-0 right-6 cursor-pointer sm:hidden md:flex ">
+            <div class="flex flex-col justify-center items-center px-4 py-7 h-full sm:w-[95%] md:w-[70%]] ">
+                <div class="mb-[24px] flex flex-col justify-center items-center ">
+                    <h3 class="font-semibold sm:text-[18px] md:text-[28px] text-center ">Transaction details</h3>
+                </div>
+                <div class="w-full flex flex-col justify-center items-center ">
+                    <div class="relative form-div w-full flex flex-col" *ngFor="let t of transaction">
+                         <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] md:text-[14px] sm:text-[12px]">Transaction type</span>
+                            <span class="text-[#101928] md:text-[14px] sm:text-[12px] font-medium">{{t.transactionType}}</span>
+                        </div>
+                        <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] md:text-[14px] sm:text-[12px]">Amount</span>
+                            <span class="text-[#101928] md:text-[14px] sm:text-[12px] font-medium">₦{{t.totalAmount}}</span>
+                        </div>
+                        <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] md:text-[14px] sm:text-[12px]">Tax fee</span>
+                            <span class="text-[#101928] md:text-[14px] sm:text-[12px] font-medium">₦{{t.fees}}</span>
+                        </div>
+                        <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] md:text-[14px] sm:text-[12px]">Transaction date</span>
+                            <span class="text-[#101928] md:text-[14px] sm:text-[12px] font-medium">{{t.createdAt}}</span>
+                        </div>
+                        <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] text-[14px]">Status</span>
+                            <span 
+                            [ngClass]="{
+                                'pending' : t.status==='PENDING',
+                                'completed' : t.status==='SUCCESSFUL',
+                                'failed' : t.status==='FAILED'
+                            }"
+                            class="text-[#101928] text-[14px] font-medium">{{t.status}}</span>
+                        </div>
+                        <div class="dt-div flex w-full justify-between">
+                            <span class="text-[#475367] text-[14px]">TRX Reference code</span>
+                            <span class="text-[#101928] text-[14px] font-medium">{{t.transactionReference}}</span>
+                        </div>
+                    </div>             
+                    <p (click)="cancel()" class=" text-red-error cursor-pointer text-[14px] mt-[18px] font-semibold">Back</p>
+                </div>
+            </div>
+    </div>
+
+    </div>
+</div>
+
+

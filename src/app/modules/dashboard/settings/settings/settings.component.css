@@ -1,0 +1,95 @@
+li{
+    margin-right: 70px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.tab-ul{
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+}
+
+.tab-ul li{  
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.1s;
+    padding: 12px 16px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #101928;
+}
+
+.active {
+    color: #C73E3E !important;
+    border-radius: 8px;
+    border: 1px solid #F4C0DB;
+}
+
+label{
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    color:  var(--grey-900, #101928);;
+}
+
+input{
+    display: block;
+    width: 100%;
+    padding: 16px;
+    outline: none;
+    font-size: .9rem;
+    border-radius: 6px;
+    border: 1px solid var(--grey-300, #D0D5DD);
+    background: var(--shade-white, #FFF);
+}
+
+hr{
+    margin: 1.2rem 0;
+    border: 1px solid #ecebeb;
+}
+.upload-btn{
+    border-radius: 8px;
+    border: 1px solid #F4C0DB;
+    background: var(--shade-white, #FFF);
+    position: relative;
+}
+.upload-btn input[type=file]{
+    font-size: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.save-btn{
+    border-radius: 8px;
+    background: #C73E3E;
+}
+
+@media screen and (min-width: 279px) and (max-width: 790px) {
+    form{
+        width: 100%;  
+    }
+	.form-div{
+        width: 100%;
+        margin-right: 0;    
+        display: block;
+    }
+    .form-div{
+        font-size: 0.9rem;
+    }
+    li{
+        margin-right: 30px;
+    }
+    input{
+        width: 100%;
+        display: block;
+    }
+    .upload-btn input[type=file]{
+        font-size: 6px;
+        width: 180px;
+        height: 20px;
+    }
+}

@@ -1,0 +1,121 @@
+<div *ngIf="!toggleMobileView && transactionsHistory && transactionsHistory.length > 0" class="w-full bg-[white]">
+    <div class="table-container w-full">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>
+                        <div class="flex items-center">
+                            <span>Name</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex items-center">
+                            <span>Amount</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex items-center">
+                            <span>Fee </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex items-center">
+                            <span>Payment Type</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex items-center">
+                            <span>Date</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex items-center">
+                            <span>Status</span>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transaction of transactionsHistory" (click)="viewTransactionDetail(transaction.id)">
+                    <td class="name flex ">
+                        <div class="w-[40px] h-[40px] bg-[#FFECE5] mr-[12px] flex flex-col justify-center items-center rounded-[50%]">
+                            <span class="text-[15px] text-[#F56630] font-semibold">W</span>
+                        </div>
+                        <div>
+                            <p class="narration">{{transaction.narration| formatNarration}}</p>
+                            <p class="trx-code">TRX CODE:{{transaction.transactionReference| formatTransactionRef}}</p>
+                        </div>
+                    </td>
+                    <td class="amount">
+                        <p class="amount-fee">₦{{transaction.totalAmount.toLocaleString()}}</p>
+                    </td>
+                    <td class="fee">
+                        <p>₦{{transaction.fees}}</p>
+                    </td>
+                    <td class="payment-type">
+                        <span class="rounded-[12px] bg-[#FFECE5]  px-[12px] py-[2px] flex flex-col justify-center items-center ">
+                            <p class="transaction-type">{{transaction.transactionType}}</p>
+                        </span>
+                    </td>
+                    <td class="date">
+                        <p class="">{{transaction.formattedDate}} | {{transaction.formattedTime}}</p>
+                    </td>
+                    <td 
+                    [ngClass]="{
+                        'pending' : transaction.status==='PENDING',
+                        'completed' : transaction.status==='SUCCESSFUL',
+                        'failed' : transaction.status==='FAILED'
+                    }"
+                    class="status">
+                        <p>{{transaction.status}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div *ngIf="toggleMobileView" class="w-full bg-[white]">
+    <div *ngFor="let transaction of transactionsHistory" (click)="viewTransactionDetail(transaction.id)" class="bg-[white] w-full">
+        <div class="py-[16px] px-4 flex justify-between items-center cursor-pointer">
+            <div class="w-[70%] flex">
+                <div class="w-[40px] h-[40px] bg-[#FFECE5] mr-[12px] flex flex-col justify-center items-center rounded-[50%]">
+                    <span class="text-[15px] text-[#F56630] font-semibold">W</span>
+                </div>
+                <div>
+                    <p class="text-[15px] font-semibold text-dark-primary leading-[18px]">{{transaction.narration | formatNarration}}</p>
+                    <p class="text-[12px] text-[#7c7c7c]">TRX CODE:{{transaction.transactionReference | formatTransactionRef}}</p>
+                </div>
+            </div>
+            <div [ngClass]="{
+                        'pending' : transaction.status==='PENDING',
+                        'completed' : transaction.status==='SUCCESSFUL',
+                        'failed' : transaction.status==='FAILED'
+                    }"
+                    class="status" class=" flex flex-col items-end justify-between gap-3">
+                <p class="amount-fee font-semibold">
+                 <span *ngIf="transaction.transactionType === 'WITHDRAWAL'">-</span>
+                 <span *ngIf="transaction.transactionType === 'SEND_PAYMENT'">-</span>
+                 <span *ngIf="transaction.transactionType === 'DEPOSIT'">+</span>
+                 <span class="text-sm">₦{{transaction.totalAmount.toLocaleString()}}</span>
+                </p>
+                <p class="text-[12px] text-[#7c7c7c]">{{transaction.formattedDate}},{{transaction.formattedTime}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="transactionsHistory && transactionsHistory.length === 0" class="flex w-full flex-col items-center justify-center py-[34px]">
+    <span>
+        <img src='../../../../assets/icons/no_transactions.svg' class="no-transaction-icon" /> 
+    </span>
+    <p class="font-semibold italic text-[18px] text-grey-900 mt-[14px]">Oops!</p>
+    <p class="text-[14px] text-grey-600 text-center sm:w-[80%] md:w-full">You have not made any transactions at this time. Let’s fix that.</p>
+    <button class="flex flex-col justify-center items-center mt-[24px] bg-red-primary rounded-[8px] px-[24px] py-[16px] gap-[10px] text-[white] text-[14px] font-semibold">Make a payment</button>
+</div>
+
+<div *ngIf="toggleView">
+    <app-view-transaction [transaction]= "transaction" (cancelButtonClicked)="closeWindow($event)"></app-view-transaction>
+</div>
+

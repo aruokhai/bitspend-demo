@@ -1,0 +1,19 @@
+<div class="card-layout text-[white]">
+      <div class="w-full flex flex-col ">
+          <span class="text-[12px] text-grey-400 mb-[16px]">Available Balance</span>
+          <div>
+              <span *ngIf="toggleBalance === false" class="md:text-[32px] sm:text-[30px] font-semibold">₦<span *ngIf="accountBalance !== null">{{accountBalance}}</span></span>
+              <span *ngIf="toggleBalance === true" class="md:text-[32px] sm:text-[30px] font-semibold">₦*****</span>
+              <span *ngIf="accountBalance=== null && toggleBalance === false" class="md:text-[32px] sm:text-[30px] font-semibold">*****</span>
+          </div>
+          <div>
+              <p *ngIf="accountNumber !== null" class="text-[12px] text-grey-400">Account Number: <span class="text-[white]">{{accountNumber.toLocaleString()}}</span></p>
+              <p *ngIf="accountNumber === null" class="text-[12px] text-grey-400">Account Number: <span class="text-[white]">*********</span></p>
+          </div>
+      </div>
+      <div class="">
+        <fa-icon *ngIf="toggleBalance === false" (click)="onToggleBalance()" [icon]="faEye" class=" text-[white] cursor-pointer z-[1000]"></fa-icon>
+        <fa-icon *ngIf="toggleBalance === true" (click)="onToggleBalance()"[icon]="faEyeSlash" class=" text-[white] cursor-pointer z-[1000]"></fa-icon> 
+      </div>
+</div>
+

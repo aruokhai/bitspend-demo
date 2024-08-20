@@ -1,0 +1,18 @@
+<div class=" w-full h-full absolute top-0 left-0 flex flex-col justify-center items-center">
+    <div class="w-[320px] p-4 h-auto bg-[white] shadow-lg rounded-[6px] overflow-hidden">
+    <div class="flex justify-between items-center mb-5">
+        <h2 class="text-lg font-bold">Dialogue</h2>
+        <i (click)="onCancelButtonClicked()" class="bx bx-x text-2xl cursor-pointer"></i>
+    </div>
+    <form [formGroup]= "dialogueForm" (ngSubmit)="updateUserPhoneNumber()">
+        <div class="mb-6">
+            <label>Phone Number</label>
+            <input type="text" formControlName="phoneNumber" name="phoneNumber" placeholder="Input your phone number" />
+        </div>
+        <div class="bottom-0 flex gap-3 justify-between items-center">
+            <button (click)="onCancelButtonClicked()" class="w-1/2 py-2 border-[1px] border-red-primary text-dark-primary rounded-[9px] transition-all ease-in-out">Cancel</button>
+            <button class="w-1/2 py-2 bg-red-primary text-[white] rounded-[9px] transition-all ease-in-out">Next</button>
+        </div>
+    </form>
+    </div>
+</div>

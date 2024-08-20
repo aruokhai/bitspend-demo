@@ -1,0 +1,78 @@
+<div class="flex">
+    <app-sidebar [sideNavIsToggled]="sideNavStatus" (sideNavToggled)="sideNavStatus = $event" ></app-sidebar>
+    <div class="main bg-grey-light">
+        <app-navbar (sideNavToggled)="sideNavStatus = $event" ></app-navbar>
+        <div class="main-content">
+            <app-dynamic-title></app-dynamic-title>
+            <div class="mt-[24px] w-auto mb-[24px]">
+                <ul class="tab-ul">
+                    <li routerLink="/dashboard/settings/profile" routerLinkActive="active">Profile</li>
+                    <li routerLink="/dashboard/settings/security" routerLinkActive="active">Account security</li>
+                </ul>
+            </div>
+            <form [formGroup] = "userUpdateForm"
+                (ngSubmit)="userUpdateForm.valid && updateUserData()" class="bg-[white] sm:px-3 sm:py-6 md:p-6">
+            <div class="flex  justify-between sm:items-center md:items-start w-full">
+                <div class="flex flex-col justify-start ">
+                    <div class="w-[230px]">
+                        <h1 class="font-semibold text-[16px] text-grey-900 mb-1">Profile photo</h1>
+                        <p class="text-[14px] leading-tight text-grey-500">This image will be displayed on your profile</p>
+                    </div>
+                    <div class="sm:flex md:hidden cursor-pointer upload-btn mt-[24px] px-[8px] py-[8px] w-[170px] flex items-center justify-center rounded-[8px] ">
+                        <img src="../../../../assets/icons/image-add.svg" class=" h-[20px] w-[20px] mr-[8px]" />
+                        <p class="text-[14px] font-semibold text-red-primary">Change Photo</p>
+                        <input (change)="onFileChange($event)" type="file" name="profilePhoto" />
+                    </div>
+                </div>
+                <div  class="sm:w-[64px] overflow-hidden sm:h-[64px] md:w-[100px] md:h-[100px] rounded-[50%] bg-red-secondary stroke-red-primary mr-[12px]">
+                    <img [src]="photoUrl" alt="" class="object-cover w-full h-full">
+                </div>
+                <div class="sm:hidden md:flex cursor-pointer upload-btn px-[12px] py-[8px] flex items-center justify-center rounded-[8px] ">
+                    <img src="../../../../assets/icons/image-add.svg" class=" h-[20px] w-[20px] mr-[8px]" />
+                    <p class="text-[14px] font-semibold text-red-primary">Change Photo</p>
+                    <input type="file" name="profilePhoto" (change)="onFileChange($event)" />
+                </div>
+                </div>
+                <button value="submit" class="sm:hidden md:flex cursor-pointer save-btn pl-[12px] pr-[18px] py-[12px] flex items-center justify-center rounded-[8px] ">
+                    <img src="../../../../assets/icons/save-changes.svg" class=" h-[20px] w-[20px] mr-[8px]" />
+                    <p class="text-[14px] font-semibold text-[white]">Save changes</p>
+                </button>
+            <hr />
+            <div class="mt-[34px] flex sm:flex-col md:flex-row w-full">
+                <div class="md:mr-[40px] sm:mb-[32px] ">
+                    <h1 class="font-semibold text-[16px] text-grey-900 mb-1">Personal Information</h1>
+                    <p class="text-[14px] leading-tight text-grey-500">Update your personal details here.</p>
+                </div>
+                <div class="">
+                    <div class="flex gap-[10px]">
+                        <div class="form-div flex mb-4 flex-col">
+                            <label>Firstname</label>
+                            <input class="form-control" formControlName="firstname"  name="firstname"  type="text"  />
+                        </div>
+                        <div class="form-div flex mb-4  flex-col">
+                            <label>Lastname</label>
+                            <input class="form-control" formControlName="lastname"  name="lastname" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-div flex mb-4  flex-col">
+                        <label>Email address</label>
+                        <input class="form-control" formControlName="email"  name="email" type="email" placeholder="you@example.com"  />
+                    </div>
+                    <div class="form-div flex mb-4  flex-col">
+                        <label>Phone number</label>
+                        <input type="text" formControlName="phoneNumber" name="phoneNumber"  />
+                    </div>
+                    <div class="form-div flex mb-4  flex-col">
+                        <label>Country</label>
+                        <input type="text" formControlName="country" name="country" readonly />
+                    </div>
+                    </div>
+            </div>
+            <button value="submit" class="sm:flex md:hidden w-full cursor-pointer save-btn p-[16px] mt-[24px] flex items-center justify-center rounded-[8px] ">
+                <img src="../../../../assets/icons/save-changes.svg" class=" h-[20px] w-[20px] mr-[8px]" />
+                <p class="text-[14px] font-semibold text-[white]">Save changes</p>
+            </button>
+        </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="flex">
+    <app-sidebar [sideNavIsToggled]="sideNavStatus" (sideNavToggled)="sideNavStatus = $event" ></app-sidebar>
+    <div class="main bg-[#fafafa]">
+        <app-navbar (sideNavToggled)="sideNavStatus = $event" ></app-navbar>
+        <div class="main-content">
+            <app-dynamic-title></app-dynamic-title>
+                <div class="bg-[white] rounded-[7px] mt-[24px]">
+                    <div *ngIf="(isLoading$ | async)?.loading" class="w-full h-[500px] flex justify-center items-center ">
+                        <app-loading-screen></app-loading-screen>
+                    </div>
+                    <app-transaction-table *ngIf="(isLoading$ | async)?.loading === false" [transactionsHistory]="(transactions$ | async) ?? []"></app-transaction-table>
+                </div>
+        </div>
+    </div>
+</div>
+
+

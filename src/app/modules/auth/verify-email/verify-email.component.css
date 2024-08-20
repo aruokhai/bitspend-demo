@@ -1,0 +1,36 @@
+
+
+input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    padding: 13px 15px;
+    outline: none;
+    background-color: #f8f8f8;
+    font-size: 1.1rem;
+    border-radius: 7px;
+    border: 2px solid #F9A7BB;
+    margin-right: 17px;
+}
+
+input.has-error{
+    border: 2px solid rgb(255, 141, 141);
+}
+
+.btn{
+    font-weight: 500;
+    color: white;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    padding: 13px;
+    border-radius: 7px;
+    
+}
+
+.error{
+    color: #E00C34;
+    font-size: 13px;
+}
