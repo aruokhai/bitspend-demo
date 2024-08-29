@@ -7,7 +7,7 @@
                 </div>
                 <p class="card-text leading-[19px] font-medium text-dark-primary">Deposit</p>
             </div>
-            <div (click)="renderPaymentComponent('WITHDRAW')" class="card withdraw bg-[white] p-4 cursor-pointer flex flex-col items-center justify-center">
+            <div (click)="renderPaymentComponent()" class="card withdraw bg-[white] p-4 cursor-pointer flex flex-col items-center justify-center">
                 <div class="icon flex justify-center items-center w-12 h-12 rounded-[50%] ">
                     <img src='../../../../assets/icons/withdraw-funds.svg' class="icon" />
                 </div>
@@ -19,7 +19,7 @@
                 </div>
                 <p class="card-text leading-[19px] font-medium text-dark-primary">Pay</p>
             </div>
-            <div *ngIf="(walletData$ | async) === null" (click)="createWalletBtnClicked()"  class="card create bg-[white] p-4 cursor-pointer flex flex-col items-center justify-center">
+            <div *ngIf="(walletData$ | async) === null" (click)="createWalletBtnClicked()"  class="create-wallet card create bg-[white] p-4 cursor-pointer flex flex-col items-center justify-center">
                 <div class="icon flex justify-center items-center w-12 h-12 rounded-[50%] ">
                     <img src='../../../../assets/icons/gala_add.svg' class="sm:w-[18px] lg:w-[32px]" />
                 </div>
@@ -36,6 +36,6 @@
         <app-send-payment (cancelButtonClicked)=" onCloseSendPaymentComponent($event)"></app-send-payment>
     </div>
     <div *ngIf="showDialogue">
-        <app-dialogue-box (cancelButtonClicked)=" onCloseDialogue($event)"></app-dialogue-box>
+        <app-dialogue-box (cancelButtonClicked)=" onCloseDialogue()"></app-dialogue-box>
     </div>
 </div>

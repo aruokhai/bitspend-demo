@@ -75,8 +75,13 @@ nav{
 	-webkit-animation: slide-in-bottom 3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: slide-in-bottom 3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
-
-
+.shepherd-button{
+	background: #C73E3E !important;
+	color: white;
+}
+.shepherd-button.shepherd-button-secondary{
+	background: #f1f2f3 !important;
+}
 @-webkit-keyframes slide-in-bottom {
   0% {
     /* -webkit-transform: translateY(1000px); */
@@ -110,6 +115,19 @@ nav{
 
 
 @media screen and (min-width: 279px) and (max-width: 730px) {
+	.shepherd-text{
+		font-size: 14px !important;
+	}
+	.shepherd-button{
+		font-size: 14px !important;
+	}
+	/* .shepherd-content{
+		background-color: aqua !important;
+		width: 90%;
+	} */
+	.shepherd-enabled.shepherd-element {
+		width: 90%;
+	}
 	
 }
 
