@@ -1,3 +1,5 @@
+import { ShepherdService } from "angular-shepherd";
+
 /* eslint-disable no-useless-escape */
 export const defaultStepOptions =  {
   classes: 'custom-class-name-1 custom-class-name-2',
@@ -9,13 +11,13 @@ export const defaultStepOptions =  {
   }
 }
 
-export const steps = 
-    [
+export function getSteps(service: ShepherdService) {
+    return [
     {
       id: 'step1',
       attachTo: { 
         element: '', 
-        on: "top"
+        on: 'top'
       },
       beforeShowPromise: function() {
         return new Promise<void>(function(resolve) {
@@ -220,7 +222,7 @@ export const steps =
     },
 
 ]
-
+}
 
 export const requiredElements = [
   // {
@@ -234,3 +236,9 @@ export const requiredElements = [
   //   title: 'Please login'
   // },
 ];
+// export class ShepherdUtility {
+//   constructor(private shepherdService: ShepherdService) { }
+
+  
+  
+// }
