@@ -1,4 +1,3 @@
-<!-- Fix  -->
 <div *ngIf=" (user$ | async) !== null" class="relative flex">
     <app-sidebar [sideNavIsToggled]="sideNavStatus" (sideNavToggled)="sideNavStatus = $event" ></app-sidebar>
     <div [ngClass]="{'sidebar-close': sideNavStatus}" class="main">
@@ -43,5 +42,7 @@
 <div *ngIf="(isLoading$ | async)?.loading" class="flex justify-center items-center w-screen h-screen z-[90000] " >
     <app-loading-screen></app-loading-screen>
 </div>
+
+
 
 

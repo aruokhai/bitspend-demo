@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { ShepherdService } from 'angular-shepherd';
+import { steps , requiredElements, defaultStepOptions} from '../app/utils/shepherd-service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
   
 })
-export class AppComponent {
-  title = 'frontend-app';
+export class AppComponent implements AfterViewInit{
+  constructor(private shepherdService: ShepherdService) { }
+
+  ngAfterViewInit() {
+    this.shepherdService.defaultStepOptions = defaultStepOptions;
+    this.shepherdService.modal = true;
+    this.shepherdService.confirmCancel = false;
+    this.shepherdService.requiredElements = requiredElements;
+    this.shepherdService.addSteps(steps);
+    
+   
+  }
+  
 }

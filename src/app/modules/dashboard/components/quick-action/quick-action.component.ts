@@ -1,22 +1,22 @@
-import { Component, ViewContainerRef, ViewChild, OnInit } from '@angular/core';
-import { QuickActionProps } from './quick-action-data.interface';
+import { Component, ViewContainerRef, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { PaymentCardComponent } from '../withdraw-wallet/withdraw-wallet.component';
 import { AppState } from '../../../../store/app.reducer';
 import { Store, select } from '@ngrx/store';
 import { getUserData } from '../../../../store/user/user.selector';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { createWallet } from 'src/app/store/wallet/wallet.actions';
 import { getWalletData } from 'src/app/store/wallet/wallet.selector';
 import { GetUserResponse } from 'src/app/interfaces/user-response';
 import { take } from 'rxjs';
 import { GetWalletResponse } from 'src/app/interfaces/wallet-interface';
+import { ShepherdService } from 'angular-shepherd';
+
 
 @Component({
   selector: 'app-quick-action',
   templateUrl: './quick-action.component.html',
   styleUrls: ['./quick-action.component.css']
 })
-export class QuickActionCardComponent implements OnInit {
+export class QuickActionCardComponent implements OnInit, AfterViewInit {
   cancelButtonClicked  = true;
   fundWalletClicked  = false;
   showDialogue  = false;
@@ -32,8 +32,16 @@ export class QuickActionCardComponent implements OnInit {
   user$ = this.store.pipe(select(getUserData));
 
   constructor(
-    private store : Store<AppState>
+    private store : Store<AppState>,
+    private shepherdService : ShepherdService
   ){}
+
+  ngAfterViewInit() {
+    if ( localStorage.getItem("tour") == null ) {
+      this.shepherdService.start();
+      localStorage.setItem("tour", "true");
+    }
+   }
   
 
   @ViewChild('container', {read: ViewContainerRef})
@@ -44,20 +52,6 @@ export class QuickActionCardComponent implements OnInit {
     this.container.clear()
     this.container.createComponent(PaymentCardComponent)
   }
-
-
-
-  asset1  = '../../../../assets/QAicons/1.png';
-  asset2  = '../../../../assets/QAicons/2.png';
-  asset3  = '../../../../assets/QAicons/3.png';
-  asset4  = '../../../../assets/QAicons/4.png';
-
-  items: Array<QuickActionProps> = [
-    { title : 'Deposit', icon: this.asset1, link: '/dashboard/transaction-history'},
-    { title : 'Withdraw', icon: this.asset2, link: '/dashboard/transaction-history'},
-    { title : 'Send', icon: this.asset3, link: '/dashboard/transaction-history'},
-    { title : 'Wallet', icon: this.asset4, link: '/dashboard/transaction-history'},
-  ]
 
   onCancel(e : boolean){
     if(e === true){
@@ -72,22 +66,9 @@ export class QuickActionCardComponent implements OnInit {
       })
   }
 
-  renderPaymentComponent(vl : string){
+  renderPaymentComponent(){
     if(!this.wallet) return
     this.cancelButtonClicked = false;
-
-    switch(vl){
-      case "SEND":
-        this.Text = "Send Money"
-        break;
-      
-      case "WITHDRAW":
-        this.Text = "Withdraw Money"
-        break;
-
-      default:
-        null;
-    }
   }
 
   renderFundWalletComponent(){
@@ -135,7 +116,7 @@ onOpenDialogue(){
     this.showDialogue = true;
 }
 
-onCloseDialogue(e: boolean){
+onCloseDialogue(){
   this.showDialogue = false;
 }
 }

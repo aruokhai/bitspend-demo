@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../../store/app.reducer';
 import * as fromWallet from '../../../store/wallet/wallet.actions' 
@@ -8,7 +8,7 @@ import { Convert } from '../../../utils/conversion'
 import { getRecentTransactions } from 'src/app/store/transaction/transaction.selector';
 import { map, take } from 'rxjs';
 import { selectWallet } from 'src/app/store/wallet/wallet.selector';
-import { FetchUserData } from 'src/app/store/user/user.action';
+
 
 @Component({
   selector: 'app-home',
@@ -23,11 +23,12 @@ export class HomeComponent implements OnInit {
   isLoading$ = this.store.pipe(select(selectUser))
   walletLoading$ = this.store.pipe(select(selectWallet));
   public sideNavStatus  = false;
+
   constructor(
     private store : Store<AppState>,
   ){}
 
-  ngOnInit() {
+   ngOnInit() {
       this.getUser();
   }
 
@@ -38,9 +39,6 @@ export class HomeComponent implements OnInit {
 
  public getUser(){
     this.user$.pipe(take(5)).subscribe(user=>{
-      // if(user){
-      //     this.store.dispatch((FetchUserData({userId: user.userId})))
-      // }
       if(user?.walletId){
          this.getWallet(user.walletId)
          this.getRecentTransactions(user.walletId)
